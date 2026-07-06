@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Task Management Board - v1",
+    "description": "CRUD APIs for Task entity",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Write README\",\n  \"description\": \"Document the project\",\n  \"completed\": false\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks"] }
+      }
+    },
+    {
+      "name": "Get All Tasks",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks"] }
+      }
+    },
+    {
+      "name": "Get Task By Id",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks", "1"] }
+      }
+    },
+    {
+      "name": "Update Task (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Write README - updated\",\n  \"description\": \"Document the project thoroughly\",\n  \"completed\": true\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks", "1"] }
+      }
+    },
+    {
+      "name": "Partial Update Task (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"completed\": true\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks", "1"] }
+      }
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{baseUrl}}/api/v1/tasks/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tasks", "1"] }
+      }
+    }
+  ]
+}
