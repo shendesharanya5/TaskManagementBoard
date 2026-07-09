@@ -38,6 +38,24 @@ public class Task {
     @Column(nullable = false)
     @Builder.Default
     private Boolean completed = false;
+    private String status;
+
+    private LocalDate dueDate;
+
+    public Task() {
+    }
+
+    public Task(Long id, String title, String description, String status, LocalDate dueDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.dueDate = dueDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -56,6 +74,9 @@ public class Task {
     @Column(length = 20)
     @Builder.Default
     private TaskStatus status = TaskStatus.TODO;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
