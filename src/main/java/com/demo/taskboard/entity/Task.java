@@ -1,24 +1,43 @@
-package com.demo.taskboard.entity;
+package com.taskboard.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-
+/**
+ * Task entity - represents a single task on the board.
+ * v1: standalone entity with basic CRUD fields.
+ * v2: belongs to a Project (Many Tasks -> One Project).
+ * v3: assigned to a User, has status/priority/due date.
+ */
 @Entity
+@Table(name = "tasks")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
+    @Column(nullable = false)
     private String title;
 
+    @Column(length = 2000)
     private String description;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean completed = false;
     private String status;
 
     private LocalDate dueDate;
@@ -38,39 +57,42 @@ public class Task {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
-    public String getDescription() {
-        return description;
-    }
+    private LocalDateTime updatedAt;
 
-    public String getStatus() {
-        return status;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_user_id")
+    private User assignedUser;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    @Builder.Default
+    private TaskStatus status = TaskStatus.TODO;
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    @Builder.Default
+    private TaskPriority priority = TaskPriority.MEDIUM;
+
+    private LocalDate dueDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }

@@ -1,26 +1,38 @@
-@Service
-public class TaskService {
+package com.taskboard.service;
 
-    @Autowired
-    private TaskRepository repository;
+import com.taskboard.dto.TaskDTO;
+import com.taskboard.entity.TaskPriority;
+import com.taskboard.entity.TaskStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-    public Task createTask(Task task) {
-        return repository.save(task);
-    }
+import java.time.LocalDate;
+import java.util.List;
 
-    public List<Task> getAllTasks() {
-        return repository.findAll();
-    }
+public interface TaskService {
 
-    public Optional<Task> getTaskById(Long id) {
-        return repository.findById(id);
-    }
+    TaskDTO createTask(TaskDTO taskDTO);
 
-    public Task updateTask(Task task) {
-        return repository.save(task);
-    }
+    List<TaskDTO> getAllTasks();
 
-    public void deleteTask(Long id) {
-        repository.deleteById(id);
-    }
+    TaskDTO getTaskById(Long id);
+
+    TaskDTO updateTask(Long id, TaskDTO taskDTO);
+
+    TaskDTO partialUpdateTask(Long id, TaskDTO taskDTO);
+
+    void deleteTask(Long id);
+
+    /**
+     * v3: search/filter tasks with pagination and sorting.
+     * Every filter argument is optional (nullable).
+     */
+    Page<TaskDTO> searchTasks(String keyword,
+                               TaskStatus status,
+                               TaskPriority priority,
+                               Long projectId,
+                               Long assignedUserId,
+                               LocalDate dueBefore,
+                               LocalDate dueAfter,
+                               Pageable pageable);
 }
