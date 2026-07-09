@@ -1,20 +1,7 @@
-package com.taskboard.controller;
+package com.demo.taskboard.controller;
 
-import com.taskboard.dto.TaskDTO;
-import com.taskboard.entity.TaskPriority;
-import com.taskboard.entity.TaskStatus;
-import com.taskboard.service.TaskService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
+import com.demo.taskboard.entity.Task;
+import com.demo.taskboard.service.TaskService;
 
 /**
  * REST controller exposing CRUD + search endpoints for Task.
