@@ -47,20 +47,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- ModelMapper (v2+) : maps between Entities and DTOs -->
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
