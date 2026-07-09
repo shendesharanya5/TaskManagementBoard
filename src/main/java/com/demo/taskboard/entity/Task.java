@@ -23,11 +23,9 @@ public class Task {
 
     private LocalDate dueDate;
 
-    // No-args constructor
     public Task() {
     }
 
-    // All-args constructor
     public Task(Long id, String title, String description, String status, LocalDate dueDate) {
         this.id = id;
         this.title = title;
@@ -36,7 +34,6 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    // Getters
     public Long getId() {
         return id;
     }
@@ -57,7 +54,6 @@ public class Task {
         return dueDate;
     }
 
-    // Setters
     public void setId(Long id) {
         this.id = id;
     }
