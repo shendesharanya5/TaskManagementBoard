@@ -11,14 +11,13 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.taskboard</groupId>
+    <groupId>com.demo.taskboard</groupId>
     <artifactId>task-management-board</artifactId>
-    <version>3.0.0</version>
-    <name>task-management-board</name>
-    <description>Task Management Board - Spring Boot REST API (v3: Users, task assignment, status/priority/due-date, search/filter/pagination/sorting)</description>
+    <version>1.0.0</version>
+<description>Simple Task Management REST API</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
