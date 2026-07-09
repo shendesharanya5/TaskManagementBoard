@@ -1,38 +1,19 @@
-package com.taskboard.service;
+package com.demo.taskboard.service;
 
-import com.taskboard.dto.TaskDTO;
-import com.taskboard.entity.TaskPriority;
-import com.taskboard.entity.TaskStatus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.demo.taskboard.entity.Task;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskService {
 
-    TaskDTO createTask(TaskDTO taskDTO);
+    Task createTask(Task task);
 
-    List<TaskDTO> getAllTasks();
+    List<Task> getAllTasks();
 
-    TaskDTO getTaskById(Long id);
+    Optional<Task> getTaskById(Long id);
 
-    TaskDTO updateTask(Long id, TaskDTO taskDTO);
-
-    TaskDTO partialUpdateTask(Long id, TaskDTO taskDTO);
+    Task updateTask(Task task);
 
     void deleteTask(Long id);
-
-    /**
-     * v3: search/filter tasks with pagination and sorting.
-     * Every filter argument is optional (nullable).
-     */
-    Page<TaskDTO> searchTasks(String keyword,
-                               TaskStatus status,
-                               TaskPriority priority,
-                               Long projectId,
-                               Long assignedUserId,
-                               LocalDate dueBefore,
-                               LocalDate dueAfter,
-                               Pageable pageable);
 }
